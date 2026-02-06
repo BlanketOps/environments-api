@@ -1,89 +1,109 @@
 /*
-Copyright 2026.
+Copyright 2025.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
 */
 
 package v1alpha1
 
 import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime"
 )
 
-// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
-// NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
+//
+// ─────────────────────────────────────────────────────────────
+// Route Spec (Kubernetes-facing envelope)
+// ─────────────────────────────────────────────────────────────
+//
 
-// RouteSpec defines the desired state of Route
+// RouteSpec is a Kubernetes-native envelope around the canonical
+// BlanketOps Route contract.
+//
+// IMPORTANT:
+// - Kubernetes does NOT understand the contents of `Contract`
+// - Kubernetes does NOT validate the contents of `Contract`
+// - Kubernetes ONLY stores and round-trips this field
+//
+// Ownership boundaries:
+// - API server: envelope + metadata
+// - Controller: lifecycle orchestration
+// - Contract layer: semantic meaning
 type RouteSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
-	// The following markers will use OpenAPI v3 schema to validate the value
-	// More info: https://book.kubebuilder.io/reference/markers/crd-validation.html
 
-	// foo is an example field of Route. Edit route_types.go to remove/update
-	// +optional
-	Foo *string `json:"foo,omitempty"`
+	// Contract is the canonical BlanketOps Route specification.
+	//
+	// This field is intentionally opaque to Kubernetes and schema generation.
+	// It is preserved verbatim by the API server.
+	//
+	// +kubebuilder:validation:Required
+	// +kubebuilder:pruning:PreserveUnknownFields
+	Contract runtime.RawExtension `json:"contract"`
 }
 
-// RouteStatus defines the observed state of Route.
+//
+// ─────────────────────────────────────────────────────────────
+// Route Status (Kubernetes-facing envelope)
+// ─────────────────────────────────────────────────────────────
+//
+
+// RouteStatus represents observed state owned by the controller.
+//
+// This mirrors the contract status but remains opaque to Kubernetes.
 type RouteStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
 
-	// For Kubernetes API conventions, see:
-	// https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#typical-status-properties
+	// Contract is the canonical BlanketOps Route status.
+	//
+	// This field is opaque and preserved verbatim.
+	//
+	// +optional
+	// +kubebuilder:pruning:PreserveUnknownFields
+	Contract runtime.RawExtension `json:"contract,omitempty"`
 
-	// conditions represent the current state of the Route resource.
-	// Each condition has a unique type and reflects the status of a specific aspect of the resource.
+	// Conditions follows standard Kubernetes condition conventions.
+	// These are intended for kubectl, UIs, and ecosystem tooling.
 	//
-	// Standard condition types include:
-	// - "Available": the resource is fully functional
-	// - "Progressing": the resource is being created or updated
-	// - "Degraded": the resource failed to reach or maintain its desired state
-	//
-	// The status of each condition is one of True, False, or Unknown.
-	// +listType=map
-	// +listMapKey=type
 	// +optional
 	Conditions []metav1.Condition `json:"conditions,omitempty"`
 }
 
+//
+// ─────────────────────────────────────────────────────────────
+// Route CRD
+// ─────────────────────────────────────────────────────────────
+//
+
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// Route is the Schema for the routes API
+// Route represents a declarative request to Route an artifact.
+//
+// This resource is a Kubernetes-native envelope around a
+// transport-agnostic BlanketOps Route contract.
 type Route struct {
-	metav1.TypeMeta `json:",inline"`
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	// metadata is a standard object metadata
-	// +optional
-	metav1.ObjectMeta `json:"metadata,omitzero"`
-
-	// spec defines the desired state of Route
-	// +required
-	Spec RouteSpec `json:"spec"`
-
-	// status defines the observed state of Route
-	// +optional
-	Status RouteStatus `json:"status,omitzero"`
+	Spec   RouteSpec   `json:"spec,omitempty"`
+	Status RouteStatus `json:"status,omitempty"`
 }
+
+//
+// ─────────────────────────────────────────────────────────────
+// RouteList
+// ─────────────────────────────────────────────────────────────
+//
 
 // +kubebuilder:object:root=true
 
-// RouteList contains a list of Route
+// RouteList contains a list of Route resources.
 type RouteList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitzero"`
+	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []Route `json:"items"`
 }
 
