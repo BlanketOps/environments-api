@@ -9,14 +9,36 @@ import (
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
 	return map[string]common.OpenAPIDefinition{
+		// BlanketOps types
 		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.Environment":       schemaEnvironment(ref),
 		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.EnvironmentList":   schemaEnvironmentList(ref),
 		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.EnvironmentSpec":   schemaEnvironmentSpec(ref),
 		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.EnvironmentStatus": schemaEnvironmentStatus(ref),
-		"io.k8s.apimachinery.pkg.version.Info":                                                           schemaVersionInfo(ref),
+		// apimachinery types required by the apiserver internals
+		"io.k8s.apimachinery.pkg.version.Info":                 schemaVersionInfo(ref),
+		"io.k8s.apimachinery.pkg.apis.meta.v1.APIGroupList":    schemaSimpleObject("APIGroupList"),
+		"io.k8s.apimachinery.pkg.apis.meta.v1.APIGroup":        schemaSimpleObject("APIGroup"),
+		"io.k8s.apimachinery.pkg.apis.meta.v1.APIVersions":     schemaSimpleObject("APIVersions"),
+		"io.k8s.apimachinery.pkg.apis.meta.v1.APIResourceList": schemaSimpleObject("APIResourceList"),
+		"io.k8s.apimachinery.pkg.apis.meta.v1.Status":          schemaSimpleObject("Status"),
+		"io.k8s.apimachinery.pkg.apis.meta.v1.WatchEvent":      schemaSimpleObject("WatchEvent"),
+		"io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta":      schemaSimpleObject("ObjectMeta"),
+		"io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta":        schemaSimpleObject("ListMeta"),
+		"io.k8s.apimachinery.pkg.apis.meta.v1.Condition":       schemaSimpleObject("Condition"),
+		"io.k8s.apimachinery.pkg.runtime.RawExtension":         schemaSimpleObject("RawExtension"),
 	}
 }
 
+func schemaSimpleObject(description string) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type:        []string{"object"},
+				Description: description,
+			},
+		},
+	}
+}
 func schemaVersionInfo(_ common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
