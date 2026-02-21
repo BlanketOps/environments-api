@@ -10,6 +10,8 @@ You may obtain a copy of the License at
 
 package v1alpha1
 
+// +k8s:openapi-gen=true
+
 import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
