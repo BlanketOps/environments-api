@@ -13,6 +13,29 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.EnvironmentList":   schemaEnvironmentList(ref),
 		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.EnvironmentSpec":   schemaEnvironmentSpec(ref),
 		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.EnvironmentStatus": schemaEnvironmentStatus(ref),
+		"io.k8s.apimachinery.pkg.version.Info":                                                           schemaVersionInfo(ref),
+	}
+}
+
+func schemaVersionInfo(_ common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type:        []string{"object"},
+				Description: "Info contains versioning information.",
+				Properties: map[string]spec.Schema{
+					"major":        {SchemaProps: spec.SchemaProps{Type: []string{"string"}}},
+					"minor":        {SchemaProps: spec.SchemaProps{Type: []string{"string"}}},
+					"gitVersion":   {SchemaProps: spec.SchemaProps{Type: []string{"string"}}},
+					"gitCommit":    {SchemaProps: spec.SchemaProps{Type: []string{"string"}}},
+					"gitTreeState": {SchemaProps: spec.SchemaProps{Type: []string{"string"}}},
+					"buildDate":    {SchemaProps: spec.SchemaProps{Type: []string{"string"}}},
+					"goVersion":    {SchemaProps: spec.SchemaProps{Type: []string{"string"}}},
+					"compiler":     {SchemaProps: spec.SchemaProps{Type: []string{"string"}}},
+					"platform":     {SchemaProps: spec.SchemaProps{Type: []string{"string"}}},
+				},
+			},
+		},
 	}
 }
 
