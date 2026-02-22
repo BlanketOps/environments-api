@@ -1,5 +1,4 @@
 // Code generated manually. DO NOT EDIT via generator.
-
 package openapi
 
 import (
@@ -9,12 +8,46 @@ import (
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
 	return map[string]common.OpenAPIDefinition{
-		// BlanketOps types
-		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.Environment":       schemaEnvironment(ref),
-		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.EnvironmentList":   schemaEnvironmentList(ref),
-		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.EnvironmentSpec":   schemaEnvironmentSpec(ref),
-		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.EnvironmentStatus": schemaEnvironmentStatus(ref),
-		// apimachinery meta v1
+		// ── environments.blanketops.dev ──────────────────────────────
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.Environment":        schemaSimpleObject("Environment"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.EnvironmentList":    schemaSimpleObject("EnvironmentList"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.EnvironmentSpec":    schemaSimpleObject("EnvironmentSpec"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.EnvironmentStatus":  schemaSimpleObject("EnvironmentStatus"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.Build":              schemaSimpleObject("Build"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.BuildList":          schemaSimpleObject("BuildList"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.BuildSpec":          schemaSimpleObject("BuildSpec"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.BuildStatus":        schemaSimpleObject("BuildStatus"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.BuildTrigger":       schemaSimpleObject("BuildTrigger"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.BuildTriggerList":   schemaSimpleObject("BuildTriggerList"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.BuildTriggerSpec":   schemaSimpleObject("BuildTriggerSpec"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.BuildTriggerStatus": schemaSimpleObject("BuildTriggerStatus"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.Deployment":         schemaSimpleObject("Deployment"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.DeploymentList":     schemaSimpleObject("DeploymentList"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.DeploymentSpec":     schemaSimpleObject("DeploymentSpec"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.DeploymentStatus":   schemaSimpleObject("DeploymentStatus"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.Package":            schemaSimpleObject("Package"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.PackageList":        schemaSimpleObject("PackageList"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.PackageSpec":        schemaSimpleObject("PackageSpec"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.PackageStatus":      schemaSimpleObject("PackageStatus"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.Route":              schemaSimpleObject("Route"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.RouteList":          schemaSimpleObject("RouteList"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.RouteSpec":          schemaSimpleObject("RouteSpec"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.RouteStatus":        schemaSimpleObject("RouteStatus"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.ServiceUnit":        schemaSimpleObject("ServiceUnit"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.ServiceUnitList":    schemaSimpleObject("ServiceUnitList"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.ServiceUnitSpec":    schemaSimpleObject("ServiceUnitSpec"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/environments/v1alpha1.ServiceUnitStatus":  schemaSimpleObject("ServiceUnitStatus"),
+		// ── events.blanketops.dev ────────────────────────────────────
+		"github.com/ntlaletsi70/blanketops-environments-api/api/events/v1alpha1.GitHubEvent":       schemaSimpleObject("GitHubEvent"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/events/v1alpha1.GitHubEventList":   schemaSimpleObject("GitHubEventList"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/events/v1alpha1.GitHubEventSpec":   schemaSimpleObject("GitHubEventSpec"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/events/v1alpha1.GitHubEventStatus": schemaSimpleObject("GitHubEventStatus"),
+		// ── sources.blanketops.dev ───────────────────────────────────
+		"github.com/ntlaletsi70/blanketops-environments-api/api/sources/v1alpha1.GitRepository":       schemaSimpleObject("GitRepository"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/sources/v1alpha1.GitRepositoryList":   schemaSimpleObject("GitRepositoryList"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/sources/v1alpha1.GitRepositorySpec":   schemaSimpleObject("GitRepositorySpec"),
+		"github.com/ntlaletsi70/blanketops-environments-api/api/sources/v1alpha1.GitRepositoryStatus": schemaSimpleObject("GitRepositoryStatus"),
+		// ── apimachinery ─────────────────────────────────────────────
 		"io.k8s.apimachinery.pkg.apis.meta.v1.APIGroupList":              schemaSimpleObject("APIGroupList"),
 		"io.k8s.apimachinery.pkg.apis.meta.v1.APIGroup":                  schemaSimpleObject("APIGroup"),
 		"io.k8s.apimachinery.pkg.apis.meta.v1.APIVersions":               schemaSimpleObject("APIVersions"),
@@ -43,12 +76,11 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"io.k8s.apimachinery.pkg.apis.meta.v1.Patch":                     schemaSimpleObject("Patch"),
 		"io.k8s.apimachinery.pkg.apis.meta.v1.RootPaths":                 schemaSimpleObject("RootPaths"),
 		"io.k8s.apimachinery.pkg.apis.meta.v1.ServerAddressByClientCIDR": schemaSimpleObject("ServerAddressByClientCIDR"),
-		// apimachinery runtime
-		"io.k8s.apimachinery.pkg.runtime.RawExtension": schemaSimpleObject("RawExtension"),
-		// apimachinery version
-		"io.k8s.apimachinery.pkg.version.Info": schemaVersionInfo(ref),
+		"io.k8s.apimachinery.pkg.runtime.RawExtension":                   schemaSimpleObject("RawExtension"),
+		"io.k8s.apimachinery.pkg.version.Info":                           schemaVersionInfo(ref),
 	}
 }
+
 func schemaSimpleObject(description string) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -59,6 +91,7 @@ func schemaSimpleObject(description string) common.OpenAPIDefinition {
 		},
 	}
 }
+
 func schemaVersionInfo(_ common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -76,50 +109,6 @@ func schemaVersionInfo(_ common.ReferenceCallback) common.OpenAPIDefinition {
 					"compiler":     {SchemaProps: spec.SchemaProps{Type: []string{"string"}}},
 					"platform":     {SchemaProps: spec.SchemaProps{Type: []string{"string"}}},
 				},
-			},
-		},
-	}
-}
-
-func schemaEnvironment(_ common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type:        []string{"object"},
-				Description: "Environment is a BlanketOps environment resource.",
-			},
-		},
-	}
-}
-
-func schemaEnvironmentList(_ common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type:        []string{"object"},
-				Description: "EnvironmentList contains a list of Environment resources.",
-			},
-		},
-	}
-}
-
-func schemaEnvironmentSpec(_ common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type:        []string{"object"},
-				Description: "EnvironmentSpec is the spec for an Environment.",
-			},
-		},
-	}
-}
-
-func schemaEnvironmentStatus(_ common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type:        []string{"object"},
-				Description: "EnvironmentStatus is the status for an Environment.",
 			},
 		},
 	}
