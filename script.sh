@@ -8,6 +8,7 @@ for f in api/environments/v1alpha1/build.go \
           api/environments/v1alpha1/route.go \
           api/environments/v1alpha1/serviceunit.go \
           api/events/v1alpha1/githubevent.go \
+          api/events/v1alpha1/githubpayload.go \
           api/sources/v1alpha1/gitrepository.go; do
   sed -i 's|^// \*\/$|// */\n// +k8s:openapi-gen=true|' $f || \
   sed -i '0,/^package /s/^package /\/\/ +k8s:openapi-gen=true\n\npackage /' $f
