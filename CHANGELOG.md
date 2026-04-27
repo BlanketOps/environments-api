@@ -2,27 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.1] - 2026-04-27
-
-### 🚀 Features
-
-- *(types)* Add githubpayload
+## [0.1.2] - 2026-04-27
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(release)* Update changelog for v0.1.0
+- Sync develop with main after release/v0.1.1
+- Update apicontract workflow to use mage verify
+- *(release)* Update changelog for v0.1.1
+
+### Release
+
+- Merge release/v0.1.2 into main
+
+## [0.1.1] - 2026-04-27
+
+### ⚙️ Miscellaneous Tasks
+
 - Sync develop with main after release/v0.1.0
+- Update apicontract workflow to use mage verify
+- *(release)* Update changelog for v0.1.0
 
 ### Release
 
 - Merge release/v0.1.1 into main
 
 ## [0.1.0] - 2026-04-27
-
-### 🚀 Features
-
-- *(gove)* Add license headers
-- *(gov)* Add license to all files
 
 ### ⚙️ Miscellaneous Tasks
 
@@ -37,7 +41,13 @@ All notable changes to this project will be documented in this file.
 
 - Merge release/v0.1.0 into main
 
-## [0.0.9] - 2026-04-05
+## [0.0.6] - 2026-02-21
+
+### 🚀 Features
+
+- *(gove)* Add license headers
+- *(gov)* Add license to all files
+- *(types)* Add githubpayload
 
 ### Bugfix
 
