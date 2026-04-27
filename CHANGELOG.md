@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.1] - 2026-04-27
+
+### 🚀 Features
+
+- *(types)* Add githubpayload
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Update changelog for v0.1.0
+- Sync develop with main after release/v0.1.0
+
+### Release
+
+- Merge release/v0.1.1 into main
+
 ## [0.1.0] - 2026-04-27
 
 ### 🚀 Features
