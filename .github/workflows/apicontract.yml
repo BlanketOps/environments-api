@@ -12,7 +12,6 @@ permissions:
 jobs:
     verify:
         runs-on: self-hosted
-
         steps:
             - uses: actions/checkout@v4
               with:
@@ -22,6 +21,9 @@ jobs:
               with:
                   go-version-file: go.mod
                   cache: true
+
+            - name: Install mage
+              run: go install github.com/magefile/mage@latest
 
             - name: Verify contracts
               run: mage verify
