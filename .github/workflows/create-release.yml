@@ -41,7 +41,8 @@ jobs:
             --base main \
             --head release/${{ github.event.inputs.version }} \
             --title "release: ${{ github.event.inputs.version }}" \
-            --body "## Release ${{ github.event.inputs.version }}
+            --body 
+          "## Release ${{ github.event.inputs.version }}
 
           Release branch cut from \`develop\`. Merge fix PRs into this branch before finalizing.
 

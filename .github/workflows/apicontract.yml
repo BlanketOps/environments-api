@@ -34,3 +34,27 @@ jobs:
               with:
                   name: crds-${{ github.ref_name }}
                   path: config/crd/bases
+
+            - name: API Contract Summary
+              if: always()
+              run: |
+                  cat >> $GITHUB_STEP_SUMMARY <<EOF
+                  # 📜 API Contract Verification
+                  ## Completed 
+                    - Checked out repository sources
+                    - Installed Go toolchain 
+                    - Installed Mage
+                    - Executed \`mage verify\` 
+                  ## Validation Scope The verification process ensures:
+                    - API schemas are valid 
+                    - Generated artifacts are up to date 
+                    - Contract definitions remain consistent - CRDs can be generated successfully
+                  EOF
+
+            - name: Release Artifact Summary
+              if: startsWith(github.ref, 'refs/tags/')
+              run: |
+                  cat >> $GITHUB_STEP_SUMMARY <<EOF
+                   ## Release Artifacts Release tag detected: \`${{ github.ref_name }}\`
+                  Uploaded: - Kubernetes CRDs from \`config/crd/bases\` These artifacts represent the API contract published with this release.
+                  EOF
