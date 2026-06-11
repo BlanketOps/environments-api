@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.5] - 2026-06-11
+
+### ⚙️ Miscellaneous Tasks
+
+- Sync develop with main after release/v0.1.4
+- *(release)* Update changelog for v0.1.4
+
+### Bugfix
+
+- *(ci)* # udpate ci release workflows include summary
+
+### Release
+
+- Merge release/v0.1.5 into main
+
 ## [0.1.4] - 2026-04-27
 
 ### ⚙️ Miscellaneous Tasks
