@@ -41,8 +41,7 @@ jobs:
             --base main \
             --head release/${{ github.event.inputs.version }} \
             --title "release: ${{ github.event.inputs.version }}" \
-            --body 
-          "## Release ${{ github.event.inputs.version }}
+            --body "## Release ${{ github.event.inputs.version }}
 
           Release branch cut from \`develop\`. Merge fix PRs into this branch before finalizing.
 
@@ -52,13 +51,17 @@ jobs:
       - name: Release Summary
         run: |
           cat >> $GITHUB_STEP_SUMMARY <<EOF 
-          # 🚀 Release Branch Created **Version:** \`${{ github.event.inputs.version }}\`
-          ## Completed - Checked out \`develop\`
+          # 🚀 Release Branch Created 
+          **Version:** \`${{ github.event.inputs.version }}\`
+          ## Completed 
+           - Checked out \`develop\`
            - Created \`release/${{ github.event.inputs.version }}\` 
            - Pushed release branch to origin 
-           - Opened (or attempted to open) a PR to \`main\` ## Release Flow develop → release/${{ github.event.inputs.version }} → main 
+           - Opened (or attempted to open) a PR to \`main\` 
+           ## Release Flow 
+           -  develop → release/${{ github.event.inputs.version }} → main 
            ## Next Steps 
-           1. Merge any release fixes into the release branch 
-           2. Validate the release candidate 
-           3. Run the **Finalize Release** workflow 
+           1. Merge any release fixes into the release branch.
+           2. Validate the release candidate .
+           3. Run the **Finalize Release** workflow. 
           EOF
