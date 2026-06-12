@@ -53,8 +53,7 @@ jobs:
       - name: Release Summary
         run: |
           cat >> $GITHUB_STEP_SUMMARY <<EOF
-          # 🎉 Release Finalized 
-          **Version:** \`${{ github.event.inputs.version }}\` 
+          # 🎉 Release Finalized **Version:** \`${{ github.event.inputs.version }}\` 
           ## Completed 
           - Merged \`release/${{ github.event.inputs.version }}\` into \`main\` 
           - Created Git tag \`${{ github.event.inputs.version }}\` 

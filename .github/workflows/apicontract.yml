@@ -1,60 +1,60 @@
 name: API Contracts
 
 on:
-    pull_request:
-    push:
-        tags:
-            - "v*"
+  pull_request:
+  push:
+    tags:
+      - "v*"
 
 permissions:
-    contents: read
+  contents: read
 
 jobs:
-    verify:
-        runs-on: self-hosted
-        steps:
-            - uses: actions/checkout@v4
-              with:
-                  fetch-depth: 0
+  verify:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-            - uses: actions/setup-go@v5
-              with:
-                  go-version-file: go.mod
-                  cache: false
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: false
 
-            - name: Install mage
-              run: go install github.com/magefile/mage@latest
+      - name: Install mage
+        run: go install github.com/magefile/mage@latest
 
-            - name: Verify contracts
-              run: mage verify
+      - name: Verify contracts
+        run: mage verify
 
-            - name: Upload CRDs
-              if: startsWith(github.ref, 'refs/tags/')
-              uses: actions/upload-artifact@v4
-              with:
-                  name: crds-${{ github.ref_name }}
-                  path: config/crd/bases
+      - name: Upload CRDs
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/upload-artifact@v4
+        with:
+          name: crds-${{ github.ref_name }}
+          path: config/crd/bases
 
-            - name: API Contract Summary
-              if: always()
-              run: |
-                  cat >> $GITHUB_STEP_SUMMARY <<EOF
-                  # 📜 API Contract Verification
-                  ## Completed 
-                    - Checked out repository sources
-                    - Installed Go toolchain 
-                    - Installed Mage
-                    - Executed \`mage verify\` 
-                  ## Validation Scope The verification process ensures:
-                    - API schemas are valid 
-                    - Generated artifacts are up to date 
-                    - Contract definitions remain consistent - CRDs can be generated successfully
-                  EOF
+      - name: API Contract Summary
+        if: always()
+        run: |
+          cat >> $GITHUB_STEP_SUMMARY <<EOF
+          # 📜 API Contract Verification
+          ## Completed 
+            - Checked out repository sources
+            - Installed Go toolchain 
+            - Installed Mage
+            - Executed \`mage verify\` 
+          ## Validation Scope The verification process ensures:
+            - API schemas are valid 
+            - Generated artifacts are up to date 
+            - Contract definitions remain consistent - CRDs can be generated successfully
+          EOF
 
-            - name: Release Artifact Summary
-              if: startsWith(github.ref, 'refs/tags/')
-              run: |
-                  cat >> $GITHUB_STEP_SUMMARY <<EOF
-                   ## Release Artifacts Release tag detected: \`${{ github.ref_name }}\`
-                  Uploaded: - Kubernetes CRDs from \`config/crd/bases\` These artifacts represent the API contract published with this release.
-                  EOF
+      - name: Release Artifact Summary
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          cat >> $GITHUB_STEP_SUMMARY <<EOF
+           ## Release Artifacts Release tag detected: \`${{ github.ref_name }}\`
+          Uploaded: - Kubernetes CRDs from \`config/crd/bases\` These artifacts represent the API contract published with this release.
+          EOF
