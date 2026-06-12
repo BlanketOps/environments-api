@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.8] - 2026-06-12
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Update changelog for v0.1.7
+- Sync develop with main after release/v0.1.7
+
+### Bugfix
+
+- *(workflows)* Fomart, update breaking magefile
+
+### Release
+
+- Merge release/v0.1.8 into main
+
 ## [0.1.7] - 2026-06-11
 
 ### ⚙️ Miscellaneous Tasks
