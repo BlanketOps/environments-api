@@ -7,7 +7,7 @@ domain: blanketops.dev
 layout:
 - go.kubebuilder.io/v4
 multigroup: true
-projectName: blanketops-environments-api
+projectName: environments-api
 repo: github.com/BlanketOps/environments-api
 resources:
 - api:
