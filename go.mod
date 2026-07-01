@@ -1,4 +1,4 @@
-module github.com/ntlaletsi70/blanketops-environments-api
+module github.com/BlanketOps/environments-api
 
 go 1.25.3
 
