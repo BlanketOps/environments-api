@@ -14,6 +14,7 @@ limitations under the License.
 */
 
 // Package v1alpha1 contains API Schema definitions for the events v1alpha1 API group.
+
 // +kubebuilder:object:generate=true
 // +groupName=events.blanketops.dev
 
