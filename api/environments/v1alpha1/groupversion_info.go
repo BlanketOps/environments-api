@@ -14,6 +14,7 @@ limitations under the License.
 */
 
 // Package v1alpha1 contains API Schema definitions for the environments v1alpha1 API group.
+
 // +kubebuilder:object:generate=true
 // +groupName=environments.blanketops.dev
 package v1alpha1
