@@ -45,9 +45,12 @@ All APIs are currently `v1alpha1` and may change in backward-incompatible ways.
 Do not move files around outside of a deliberate API group change. The CLI
 expects files in specific locations (`api/<group>/<version>/`).
 
-### Always Use CLI Commands to Scaffold
-Use `kubebuilder create api` (with `--controller=false` since this repo has
-no controllers) to scaffold new Kinds. Do NOT create type files manually.
+### New Kinds Follow the Existing Envelope Pattern, Not Raw Kubebuilder Scaffolding
+Every Kind is a fixed `Contract runtime.RawExtension` envelope (see API
+Design below), not a conventionally-typed kubebuilder resource. Copy an
+existing file (e.g. `domain.go`) rather than trust `kubebuilder create api`'s
+default scaffold output, which produces typed fields that don't match this
+repo's pattern.
 
 ### No Makefile
 This repo does not have a `Makefile`. All build/codegen/release tasks are
@@ -88,38 +91,91 @@ mage publish     # bundle, then push to OCI registry via oras (needs VERSION/tag
 `controller-gen` is installed automatically into `bin/controller-gen` by the
 mage targets that need it.
 
-## CLI Commands Cheat Sheet
-
-### Create a new API type (no controller, this is a types-only repo)
-```bash
-kubebuilder create api --group <group> --version v1alpha1 --kind <Kind> --controller=false
-```
-
-### Adding a Kind to an existing group
-Reuse the group's existing version directory (`api/<group>/v1alpha1`); do not
-create a new version unless intentionally starting a new API version.
-
 ## API Design
 
-**Key markers for** `api/<group>/<version>/*.go`:
+Every Kind in this repo is a thin, uniform **envelope around an opaque
+contract**, not a conventionally-typed kubebuilder resource. Kubernetes
+stores and round-trips the envelope; it does not understand or validate the
+`Contract` payload itself — that's owned by the contract layer downstream.
+All nine existing Kinds (`Environment`, `Build`, `Deployment`, `ServiceUnit`,
+`Package`, `Route`, `Domain`, `GitHubEvent`, `GitRepository`) follow this
+exact shape, e.g. `api/networks/v1alpha1/domain.go`:
 
 ```go
+// +k8s:openapi-gen=true
+package v1alpha1
+
+type <Kind>Spec struct {
+	// Contract is the canonical BlanketOps <Kind> specification.
+	// Opaque to Kubernetes; preserved verbatim by the API server.
+	//
+	// +kubebuilder:validation:Required
+	// +kubebuilder:pruning:PreserveUnknownFields
+	Contract runtime.RawExtension `json:"contract"`
+}
+
+type <Kind>Status struct {
+	// +optional
+	// +kubebuilder:pruning:PreserveUnknownFields
+	Contract runtime.RawExtension `json:"contract,omitempty"`
+
+	// +optional
+	Conditions []metav1.Condition `json:"conditions,omitempty"`
+}
+
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Namespaced
-// +kubebuilder:printcolumn:name="Status",type=string,JSONPath=".status.conditions[?(@.type=='Ready')].status"
+type <Kind> struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+	Spec   <Kind>Spec   `json:"spec,omitempty"`
+	Status <Kind>Status `json:"status,omitempty"`
+}
 
-// On fields:
-// +kubebuilder:validation:Required
-// +kubebuilder:validation:Minimum=1
-// +kubebuilder:validation:MaxLength=100
-// +kubebuilder:validation:Pattern="^[a-z]+$"
-// +kubebuilder:default="value"
+// +kubebuilder:object:root=true
+type <Kind>List struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []<Kind> `json:"items"`
+}
+
+func init() {
+	SchemeBuilder.Register(&<Kind>{}, &<Kind>List{})
+}
 ```
 
-- **Use** `metav1.Condition` for status (not custom string fields)
-- **Use predefined types**: `metav1.Time` instead of `string` for dates
-- **Follow K8s API conventions**: Standard field names (`spec`, `status`, `metadata`)
+**Rules that follow from this:**
+- Do NOT add typed fields to `Spec`/`Status` with per-field validation
+  markers (`Minimum`, `MaxLength`, `Pattern`, `default`, etc.) — there is
+  exactly one field, `Contract runtime.RawExtension`, marked `Required` +
+  `PreserveUnknownFields` on Spec, and `optional` + `PreserveUnknownFields`
+  on Status. Field-level schema validation belongs to the contract layer,
+  not this envelope.
+- `Status.Conditions []metav1.Condition` is the only other status field;
+  it's what `kubectl`/UIs read, not `Contract`.
+- Every file starts with a `// +k8s:openapi-gen=true` marker (added by
+  `hack/generate-api-types.sh`, not scaffolded by kubebuilder — see below).
+
+### Adding a Kind to an existing group
+Reuse the group's existing version directory (`api/<group>/v1alpha1`); do
+not create a new version unless intentionally starting a new API version.
+`kubebuilder create api` scaffolds a *conventional* Spec/Status (typed
+fields, no `Contract` envelope) — do not keep its default output. Instead:
+1. Copy an existing file in the target group (e.g. `domain.go`) to
+   `<kind>.go` and rename `Domain` → `<Kind>` throughout.
+2. Add the new file's path to the list in `hack/generate-api-types.sh` so
+   it gets the `+k8s:openapi-gen=true` marker, then run that script.
+3. Add the new Kind's entry to `PROJECT` under the correct `group`/`path`.
+4. Add the corresponding block to
+   `pkg/generated/openapi/generated.openapi.go` (`<Kind>`, `<Kind>List`,
+   `<Kind>Spec`, `<Kind>Status`) — this file is hand-maintained, not
+   generated by a tool, despite the header comment.
+5. Run `mage generate manifests` and `gofmt -w` the OpenAPI file.
+
+### Adding a new group
+Same as above, plus a new `api/<group>/v1alpha1/groupversion_info.go`
+declaring `+groupName=<group>.blanketops.dev` (see
+`api/networks/v1alpha1/groupversion_info.go` for the pattern).
 
 ## Versioning Policy
 
