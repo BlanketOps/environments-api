@@ -31,14 +31,6 @@ resources:
     namespaced: true
   domain: blanketops.dev
   group: environments
-  kind: BuildTrigger
-  path: github.com/BlanketOps/environments-api/api/environments/v1alpha1
-  version: v1alpha1
-- api:
-    crdVersion: v1
-    namespaced: true
-  domain: blanketops.dev
-  group: environments
   kind: Deployment
   path: github.com/BlanketOps/environments-api/api/environments/v1alpha1
   version: v1alpha1
@@ -56,7 +48,7 @@ resources:
   domain: blanketops.dev
   group: networks
   kind: Route
-  path: github.com/BlanketOps/environments-api/api/environments/v1alpha1
+  path: github.com/BlanketOps/environments-api/api/networks/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -64,7 +56,7 @@ resources:
   domain: blanketops.dev
   group: networks
   kind: Domain
-  path: github.com/BlanketOps/environments-api/api/environments/v1alpha1
+  path: github.com/BlanketOps/environments-api/api/networks/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -80,7 +72,7 @@ resources:
   domain: blanketops.dev
   group: events
   kind: GitHubEvent
-  path: github.com/BlanketOps/blanketops-environments-api/api/events/v1alpha1
+  path: github.com/BlanketOps/environments-api/api/events/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -88,6 +80,6 @@ resources:
   domain: blanketops.dev
   group: sources
   kind: GitRepository
-  path: github.com/BlanketOps/blanketops-environments-api/api/sources/v1alpha1
+  path: github.com/BlanketOps/environments-api/api/sources/v1alpha1
   version: v1alpha1
 version: "3"
