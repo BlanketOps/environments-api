@@ -18,7 +18,9 @@ jobs:
           fetch-depth: 0
 
       - name: Install mage
-        run: go install github.com/magefile/mage@latest
+        run: |
+          go install github.com/magefile/mage@latest
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
 
       - name: Verify contracts
         run: mage verify
