@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.4] - 2026-07-12
+
+### 🐛 Bug Fixes
+
+- *(ci)* Add GOPATH/bin to PATH so mage is found on ubuntu-latest
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Update changelog for v0.2.3
+- Sync develop with main after release/v0.2.3
+- *(docs)* Sync AGENTS.md/PROJECT/README with networks group move and drop BuildTrigger
+
+### Release
+
+- Merge release/v0.2.4 into main
+
 ## [0.2.3] - 2026-07-01
 
 ### ⚙️ Miscellaneous Tasks
