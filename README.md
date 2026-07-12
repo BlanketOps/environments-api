@@ -68,11 +68,12 @@ Breaking changes require a new API version.
 
 ## Code Generation
 
-CRDs and deepcopy code are generated using `controller-gen`.
+CRDs and deepcopy code are generated using `controller-gen`, invoked via
+[mage](https://magefile.org) targets (this repo has no Makefile).
 
 To generate all artifacts:
 
 ```sh
-make generate
-make manifests
+mage generate
+mage manifests
 ```
