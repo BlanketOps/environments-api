@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.5] - 2026-07-12
+
+### 🐛 Bug Fixes
+
+- *(docs)* Correct AGENTS.md API Design section to match actual envelope pattern
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Update changelog for v0.2.4
+- Sync develop with main after release/v0.2.4
+
 ## [0.2.4] - 2026-07-12
 
 ### 🐛 Bug Fixes
