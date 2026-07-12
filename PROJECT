@@ -8,7 +8,7 @@ layout:
 - go.kubebuilder.io/v4
 multigroup: true
 projectName: environments-api
-repo: github.com/BlanketOps/environments-api
+repo: github.com/blanketops/environments-api
 resources:
 - api:
     crdVersion: v1
@@ -16,7 +16,7 @@ resources:
   domain: blanketops.dev
   group: environments
   kind: Environment
-  path: github.com/BlanketOps/environments-api/api/environments/v1alpha1
+  path: github.com/blanketops/environments-api/api/environments/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -24,7 +24,7 @@ resources:
   domain: blanketops.dev
   group: environments
   kind: Build
-  path: github.com/BlanketOps/environments-api/api/environments/v1alpha1
+  path: github.com/blanketops/environments-api/api/environments/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -32,7 +32,7 @@ resources:
   domain: blanketops.dev
   group: environments
   kind: Deployment
-  path: github.com/BlanketOps/environments-api/api/environments/v1alpha1
+  path: github.com/blanketops/environments-api/api/environments/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -40,7 +40,7 @@ resources:
   domain: blanketops.dev
   group: environments
   kind: ServiceUnit
-  path: github.com/BlanketOps/environments-api/api/environments/v1alpha1
+  path: github.com/blanketops/environments-api/api/environments/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -48,7 +48,7 @@ resources:
   domain: blanketops.dev
   group: networks
   kind: Route
-  path: github.com/BlanketOps/environments-api/api/networks/v1alpha1
+  path: github.com/blanketops/environments-api/api/networks/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -56,7 +56,7 @@ resources:
   domain: blanketops.dev
   group: networks
   kind: Domain
-  path: github.com/BlanketOps/environments-api/api/networks/v1alpha1
+  path: github.com/blanketops/environments-api/api/networks/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -64,7 +64,7 @@ resources:
   domain: blanketops.dev
   group: environments
   kind: Package
-  path: github.com/BlanketOps/environments-api/api/environments/v1alpha1
+  path: github.com/blanketops/environments-api/api/environments/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -72,7 +72,7 @@ resources:
   domain: blanketops.dev
   group: events
   kind: GitHubEvent
-  path: github.com/BlanketOps/environments-api/api/events/v1alpha1
+  path: github.com/blanketops/environments-api/api/events/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -80,6 +80,6 @@ resources:
   domain: blanketops.dev
   group: sources
   kind: GitRepository
-  path: github.com/BlanketOps/environments-api/api/sources/v1alpha1
+  path: github.com/blanketops/environments-api/api/sources/v1alpha1
   version: v1alpha1
 version: "3"
